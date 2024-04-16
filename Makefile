@@ -48,7 +48,7 @@ RDG                         := no
 RICHARDS                    := no
 STOCHASTIC_TOOLS            := no
 THERMAL_HYDRAULICS          := no
-TENSOR_MECHANICS            := yes#no
+SOLID_MECHANICS             := yes#no
 XFEM                        := no
 
 include $(MOOSE_DIR)/modules/modules.mk

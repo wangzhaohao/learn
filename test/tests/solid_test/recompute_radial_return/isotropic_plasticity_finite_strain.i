@@ -38,11 +38,12 @@
   [./all]
     strain = FINITE
     add_variables = true
-    generate_output = 'stress_yy plastic_strain_xx plastic_strain_yy plastic_strain_zz'
+    generate_output = 'stress_yy plastic_strain_xx plastic_strain_yy plastic_strain_zz vonmises_stress'
   [../]
 []
 
 [BCs]
+# 顶端拉伸，三个面选择对称条件，也就是垂直方向的位移是零
   [./y_pull_function]
     type = FunctionDirichletBC
     variable = disp_y
@@ -75,9 +76,11 @@
     youngs_modulus = 2.1e5
     poissons_ratio = 0.3
   [../]
+  # 屈服应力是50Pa,超过之后开始出现塑形，硬化法则（描述屈服应力随应变增加而增加）
   [./isotropic_plasticity]
     type = IsotropicPlasticityStressUpdate
     yield_stress = 50.0
+    # 好像这个是传递进去的应力？ 代码里面显示的_hardening_functin->value(strain_old + scalar)
     hardening_function = hf
   [../]
   [./radial_return_stress]
