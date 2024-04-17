@@ -122,6 +122,7 @@
   [./plas]
     type = IsotropicPlasticityStressUpdate
     hardening_constant = 1
+    # 屈服压力过大，test中达不到
     yield_stress = 1e30
   [../]
 []
