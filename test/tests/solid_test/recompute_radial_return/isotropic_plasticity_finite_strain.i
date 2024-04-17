@@ -80,7 +80,7 @@
   [./isotropic_plasticity]
     type = IsotropicPlasticityStressUpdate
     yield_stress = 50.0
-    # 好像这个是传递进去的应力？ 代码里面显示的_hardening_functin->value(strain_old + scalar)
+    # 好像这个是传递进去的应变？ 代码里面显示的_hardening_functin->value(strain_old + scalar)
     hardening_function = hf
   [../]
   [./radial_return_stress]
