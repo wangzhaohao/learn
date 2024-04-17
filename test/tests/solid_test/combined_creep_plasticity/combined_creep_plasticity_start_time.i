@@ -142,6 +142,7 @@
     n_exponent = 5
     m_exponent = -0.5
     activation_energy = 0
+    # 第十秒开始计算
     start_time = 10
   [../]
   [./plas]

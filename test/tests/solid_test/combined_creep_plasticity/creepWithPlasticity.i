@@ -84,6 +84,7 @@
     y = '-20 -40   -20'
   []
 
+  # 时间步长，和FunctionDT中调用，x是时间t, y是对应的dt
   [dts]
     type = PiecewiseLinear
     x = '0        0.5    1.0    1.5'
@@ -160,7 +161,7 @@
   solve_type = 'PJFNK'
 
   petsc_options = '-snes_ksp'
-  petsc_options_iname = '-ksp_gmres_restart'
+  petsc_options_iname = '-ksp_gmres_restart' # 要存储的Krylov矢量
   petsc_options_value = '101'
 
   line_search = 'none'
