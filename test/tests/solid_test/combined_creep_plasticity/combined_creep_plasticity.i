@@ -133,6 +133,7 @@
     inelastic_models = 'creep plas'
     max_iterations = 50
     absolute_tolerance = 1e-05
+    # 和非线性的应变模型相同长度的变量，默认是1111
     combined_inelastic_strain_weights = '0.0 1.0'
   [../]
   [./creep]
