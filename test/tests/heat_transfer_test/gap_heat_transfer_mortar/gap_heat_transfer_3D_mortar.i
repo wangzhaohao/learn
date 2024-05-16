@@ -57,6 +57,7 @@ outer_Tinf = 300 # K
     input = right_block
     old_boundary = '0 1 2 3 4 5'
     # new_boundary = 'right_bottom right_back right_right right_front right_left right_top'
+    # 这么做是因为MOOSE中，MOOSE真正执行的是ID而不是字符串，所以需要先改成数字，之后再改给字符串
     new_boundary = '100 101 102 103 104 105'
   []
   [right_block_sidesets_rename]

@@ -113,7 +113,7 @@ rpv_blocks = '3'
   [ced]
     type = ModularGapConductanceConstraint
     variable = lm
-    #如果primary_variable没有提供则会是用variable
+    #如果primary_variable没有提供则会是用secondary_variable
     secondary_variable = Tsolid
     primary_boundary = 'core_outer'
     primary_subdomain = 10000
