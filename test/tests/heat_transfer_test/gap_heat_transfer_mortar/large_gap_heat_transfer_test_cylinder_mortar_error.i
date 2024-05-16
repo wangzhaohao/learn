@@ -18,8 +18,9 @@ rpv_blocks = '3'
     rings = '2 1 2'
     has_outer_square = false
     preserve_volumes = true
-    portion = full
+    portion = full # 控制哪部分网格用于产生
   []
+  # 默认产生的是从内向外的1 2 3
   [rename_core_bdy]
     type = SideSetsBetweenSubdomainsGenerator
     input = core_gap_rpv
@@ -39,6 +40,7 @@ rpv_blocks = '3'
     input = rename_inner_rpv_bdy
     block = 2
   []
+  # 在低一个维度中进行定义block
   [secondary]
     type = LowerDBlockFromSidesetGenerator
     sidesets = 'rpv_inner'
@@ -53,7 +55,7 @@ rpv_blocks = '3'
     new_block_name = 'primary_lower'
     input = secondary
   []
-  allow_renumbering = false
+  allow_renumbering = false #固定所有节点编号和元素编号，除非删除
 []
 
 [Variables]
@@ -61,6 +63,7 @@ rpv_blocks = '3'
     initial_condition = 500
   []
   [lm]
+    #lm的order是否需要关注
     order = FIRST
     family = LAGRANGE
     block = 'secondary_lower'
@@ -110,6 +113,7 @@ rpv_blocks = '3'
   [ced]
     type = ModularGapConductanceConstraint
     variable = lm
+    #如果primary_variable没有提供则会是用variable
     secondary_variable = Tsolid
     primary_boundary = 'core_outer'
     primary_subdomain = 10000
@@ -117,6 +121,8 @@ rpv_blocks = '3'
     secondary_subdomain = 10001
     gap_flux_models = 'radiation conduction'
     gap_geometry_type = 'CYLINDER'
+    # 源文件缺少cylinder内侧点
+    cylinder_axis_point_1 = '0 0 0'
     cylinder_axis_point_2 = '0 0 5'
   []
 []
@@ -184,7 +190,7 @@ rpv_blocks = '3'
   []
   [heat_balance] # should be equal to 0 upon convergence
     type = ParsedPostprocessor
-    function = '(rpv_convective_out - ptot) / ptot'
+    expression = '(rpv_convective_out - ptot) / ptot'
     pp_names = 'rpv_convective_out ptot'
   []
 []
@@ -223,6 +229,6 @@ rpv_blocks = '3'
 []
 
 [Outputs]
-  exodus = false
+  exodus = true
   csv = true
 []
