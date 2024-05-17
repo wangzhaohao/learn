@@ -33,14 +33,14 @@
   [dummy]
     order = FIRST
     family = LAGRANGE
-    initial_condition = 1.0
+    initial_condition = 0.1
   []
 []
 
 [Functions]
   [function]
     type = ParsedFunction
-      expression = 'if(t > 100.0, 0.0, t)'
+    expression = 'if(t > 100.0, 0.0, t)'
   []
 []
 
@@ -87,6 +87,7 @@
   [hc_displaced_block]
     type = ADHeatConduction
     variable = temp
+    #考虑变形之后网格对结果的影响
     use_displaced_mesh = true
     block = '1'
   []
@@ -115,6 +116,7 @@
     boundary = 100
     gap_conductivity = 10.0
     gap_conductivity_function_variable = dummy
+    # 函数是（dummy>100, 0, dummy)
     gap_conductivity_function = function
   []
 []
