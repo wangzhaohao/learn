@@ -5,7 +5,7 @@
 [Mesh]
   [file]
     type = FileMeshGenerator
-    file = 2blk-gap.e
+    file = 2blk-gap_cubit.e
   []
   [secondary]
     type = LowerDBlockFromSidesetGenerator
