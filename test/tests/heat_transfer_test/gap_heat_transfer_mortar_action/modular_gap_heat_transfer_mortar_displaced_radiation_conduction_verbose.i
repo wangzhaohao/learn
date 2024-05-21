@@ -121,7 +121,8 @@
     primary_subdomain = 10000
     secondary_boundary = 101
     secondary_subdomain = 10001
-    correct_edge_dropping = true
+    # 默认是false,设置为true是考虑边缘效应，测试结果表明在这个例子里面没有影响
+    correct_edge_dropping = false # true
     gap_flux_models = 'radiation conduction'
   []
 []

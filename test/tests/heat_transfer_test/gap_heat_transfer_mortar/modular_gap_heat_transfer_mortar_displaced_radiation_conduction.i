@@ -25,8 +25,8 @@
 []
 
 [Problem]
-  kernel_coverage_check = false
-  material_coverage_check = false
+  kernel_coverage_check = false #不检查每一个区域都有方程
+  material_coverage_check = false #不检查每一个区域都有材料属性
 []
 
 [Variables]

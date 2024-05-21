@@ -75,6 +75,7 @@
 []
 
 [MortarGapHeatTransfer]
+  # 使用action中的MotarGapHeatTransferAction
   [mortar_heat_transfer]
    temperature = temp
 
