@@ -19,6 +19,21 @@ thermal_expansion_coeff = 6.66e-6
     type = FileMeshGenerator
     file = 'test.msh'
   []
+  # 创建低维block，contact在使用mator会自动创建
+  [sub_secondary]
+    type = LowerDBlockFromSidesetGenerator
+    sidesets = 'void_pellet_1'
+    new_block_id = 10000
+    new_block_name = 'pellet_secondary_subdomain'
+    input = ori
+  []
+  [sub_primary]
+    type = LowerDBlockFromSidesetGenerator
+    sidesets = 'void_pellet_0'
+    new_block_id = 10001
+    new_block_name = 'pellet_primary_subdomain'
+    input = sub_secondary
+  []
 []
 
 [Variables]
@@ -89,7 +104,7 @@ thermal_expansion_coeff = 6.66e-6
 []
 
 [Debug]
-  show_var_residual_norms = TRUE
+#  show_var_residual_norms = TRUE
 []
 
 [BCs]
@@ -157,9 +172,11 @@ thermal_expansion_coeff = 6.66e-6
     primary = void_pellet_0
     secondary = void_pellet_1
     model = frictionless
-    formulation = mortar
-    c_normal = 1e6
-    correct_edge_dropping = true
+#    formulation = mortar
+#    c_normal = 1e6
+#    correct_edge_dropping = true
+    formulation = penalty
+    penalty = 3e12
   []
 []
 
@@ -209,14 +226,14 @@ thermal_expansion_coeff = 6.66e-6
 #  ignore_variables_for_autoscaling = 'pellet_normal_lm'
 #  compute_scaling_once = true
 #  scaling_group_variables = 'disp_x disp_y disp_z; T_K'
-  nl_rel_tol = 1e-50
+  nl_rel_tol = 1e-20
   nl_abs_tol = 1e-8
   nl_max_its = 20
   dtmin = 1e-3
   dt = 1e-3
   start_time = 0e-3
   end_time = 1
-  num_steps = 2
+  num_steps = 10
 []
 
 [Outputs]
@@ -224,6 +241,5 @@ thermal_expansion_coeff = 6.66e-6
     type = Exodus
     file_base = constMat
   []
-  print_linear_residuals = false
+  print_linear_residuals = true #false
 []
-# 报错，说存在MetaPhysical问题，大概是存在NaN这样的问题？没找到
