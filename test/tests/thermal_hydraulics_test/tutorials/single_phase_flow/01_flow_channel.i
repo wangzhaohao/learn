@@ -1,12 +1,12 @@
 T_in = 300. # K
-m_dot_in = 1e-2 # kg/s
+m_dot_in = 1e-2 # kg/s 质量流量越快，压力差越大
 press = 10e5 # Pa
 
 [GlobalParams]
   initial_p = ${press}
   initial_vel = 0.0001
   initial_T = ${T_in}
-  gravity_vector = '0 0 0'
+  gravity_vector = '0 0 0'#忽略重力影响
 
   rdg_slope_reconstruction = minmod
   scaling_factor_1phase = '1 1e-2 1e-4'
@@ -17,15 +17,15 @@ press = 10e5 # Pa
 [FluidProperties]
   [he]
     type = IdealGasFluidProperties
-    molar_mass = 4e-3
-    gamma = 1.67
-    k = 0.2556
-    mu = 3.22639e-5
+    molar_mass = 4e-3 #摩尔质量g/mol
+    gamma = 1.67 # 比热比
+    k = 0.2556 #热导率W/m·K
+    mu = 3.22639e-5 # 动力粘度Pa·S
   []
 []
 
 [Closures]
-  [thm_closures]
+  [thm_closures]#类似Kernel,不过是多个Kernel,大概是action？
     type = Closures1PhaseTHM
   []
 []
@@ -43,8 +43,8 @@ press = 10e5 # Pa
     position = '0 0 0'
     orientation = '0 0 1'
     length = 1
-    n_elems = 25
-    A = 7.2548e-3
+    n_elems = 25 # 划分多少个网格
+    A = 7.2548e-3 # 入口面积
     D_h = 7.0636e-2
   []
 
@@ -56,13 +56,13 @@ press = 10e5 # Pa
 []
 
 [Postprocessors]
-  [core_p_in]
+  [core_p_in]#入口压力
     type = SideAverageValue
     boundary = core_chan:in
     variable = p
   []
 
-  [core_p_out]
+  [core_p_out]#出口压力
     type = SideAverageValue
     boundary = core_chan:out
     variable = p
