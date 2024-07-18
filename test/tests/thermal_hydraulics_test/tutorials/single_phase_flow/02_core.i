@@ -73,7 +73,7 @@ tot_power = 2000 # W
     D_h = ${Dh_core}
   []
 
-  [core_hs]
+  [core_hs]# 圆柱下的热源，调用之前定义的总功率
     type = HeatStructureCylindrical
     position = '0 0 0'
     orientation = '0 0 1'
@@ -83,7 +83,7 @@ tot_power = 2000 # W
     widths = '${fparse core_dia / 2.}'
     solid_properties = 'steel'
     solid_properties_T_ref = '300'
-    n_part_elems = 3
+    n_part_elems = 3 #径向网格
   []
 
   [core_heating]
@@ -96,9 +96,9 @@ tot_power = 2000 # W
   [core_ht]
     type = HeatTransferFromHeatStructure1Phase
     flow_channel = core_chan
-    hs = core_hs
+    hs = core_hs#热结构的名称
     hs_side = outer
-    P_hf = '${fparse pi * core_dia}'
+    P_hf = '${fparse pi * core_dia}'#热传递的周长
   []
 
   [outlet]

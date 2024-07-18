@@ -5,7 +5,7 @@
 
 [Mesh]
   type = GeneratedMesh
-  dim = 1
+  dim = 2
   xmax = 1
   nx = 10
 []
@@ -35,6 +35,7 @@
     variable = q_wall
     function = sin_fn
     execute_on = 'initial timestep_end'
+    boundary = 'top'
   []
 []
 
@@ -81,6 +82,7 @@
     app_type = ThermalHydraulicsApp
     input_files = phy.q_wall_transfer_3eqn.child.i
     execute_on = 'initial timestep_end'
+    library_path = '../moose/modules/thermal_hydraulics/lib'# 调用MOOSE里面的library_path
   []
 []
 
@@ -88,12 +90,12 @@
   [q_to_thm]
     type = MultiAppGeneralFieldNearestLocationTransfer
     to_multi_app = thm
-    source_variable = q_wall
+    source_variable = q_wall # 看来跟边界没有关系，只是将数值传递过去
     variable = q_wall
   []
 []
 
 [Outputs]
   exodus = true
-  show = 'q_wall'
+#  show = 'q_wall'
 []

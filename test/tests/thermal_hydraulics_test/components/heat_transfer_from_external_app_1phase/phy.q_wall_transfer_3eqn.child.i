@@ -47,7 +47,7 @@
   []
 
   [outlet]
-    type = SolidWall1Phase
+    type = SolidWall1Phase #终止处，一般是管道的入口或者出口
     input = 'pipe1:out'
   []
 []
@@ -86,5 +86,5 @@
 
 [Outputs]
   exodus = true
-  show = 'q_wall'
+#  show = 'q_wall'
 []
