@@ -48,7 +48,7 @@
     eigenstrain_names = eigenstrain
     scalar_out_of_plane_strain = scalar_strain_zz
     temperature = temp
-    save_in = 'saved_x saved_y'
+    save_in = 'saved_x saved_y'#位移的残差
   [../]
 []
 
